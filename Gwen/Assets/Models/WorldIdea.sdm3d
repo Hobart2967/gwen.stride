@@ -1,0 +1,15 @@
+!Model
+Id: 71942c7e-8723-4f83-9ec1-bd608baf3164
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../../3d/WorldIdea.dae
+Skeleton: 0a015a8a-6434-416b-9385-cec357e6e7c5:Models/WorldIdea Skeleton_2
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    bef14aab6d229170a687f46aa5215dcb:
+        Name: Material
+        MaterialInstance:
+            Material: 8f4d0d30-21fb-4d87-8466-62a04f5d9e1d:Models/Material_2
+Modifiers: {}
+~SourceHashes:
+    e12e22b67a625acecc128170b791c707~../../../3d/WorldIdea.dae: 10e138f79c0bccfb47d6bca1e0165819

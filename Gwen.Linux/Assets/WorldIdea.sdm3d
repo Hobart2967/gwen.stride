@@ -1,0 +1,15 @@
+!Model
+Id: f229a9a9-07c1-4ad9-8ded-8663704b6f21
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../Gwen/Assets/WorldIdea.dae
+Skeleton: 24851e1d-faee-496d-af8f-abdfaec7092a:WorldIdea Skeleton
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    d4473b1d3741ad1638cce0072467f389:
+        Name: Material
+        MaterialInstance:
+            Material: d89ae4f8-ec22-45cc-b7b2-e3bdcc59e897:Material
+Modifiers: {}
+~SourceHashes:
+    513ee9a3eaadacb328bcbba0a6978b2d~../../3d/WorldIdea.dae: 10e138f79c0bccfb47d6bca1e0165819

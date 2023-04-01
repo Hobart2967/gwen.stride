@@ -98,7 +98,8 @@ namespace Gwen
                 Game.IsMouseVisible = false;
 
                 character.Orientation = Quaternion.RotationY(camRotation.Y);
-                firstPersonCameraPivot.Transform.Rotation = Quaternion.RotationX(camRotation.X);                    
+                
+                firstPersonCameraPivot.Transform.Rotation = Quaternion.RotationX(camRotation.X);
             }
             else
             {
@@ -106,17 +107,20 @@ namespace Gwen
                 Game.IsMouseVisible = true;
                 thirdPersonCameraPivot.Transform.Position = new Vector3(x, y, z);
             }
-                
+
             // Entity.Transform.Rotation = Quaternion.RotationY(camRotation.Y);
             // Apply X camera rotation to the existing camera rotations                
-                
-            thirdPersonCameraPivot.Transform.Position = new Vector3(this._cameraOffset.X, this._cameraOffset.Y, 0);
+
+            
+            thirdPersonCameraPivot.Transform.Position = new Vector3(x, y, 0);
             thirdPersonCameraPivot.Transform.Position += this._cameraOffset;
 
             thirdPersonCameraPivot.Transform.UpdateWorldMatrix();
 
             var raycastStart = firstPersonCameraPivot.Transform.WorldMatrix.TranslationVector;
             var raycastEnd = thirdPersonCameraPivot.Transform.WorldMatrix.TranslationVector;
+
+            
 
             if (this.simulation.Raycast(raycastStart, raycastEnd, out HitResult result))
             {

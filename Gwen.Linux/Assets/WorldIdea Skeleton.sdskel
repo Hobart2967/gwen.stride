@@ -1,0 +1,13 @@
+!Skeleton
+Id: 24851e1d-faee-496d-af8f-abdfaec7092a
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../3d/WorldIdea.dae
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Nodes:
+    70098d06c412c69b4530a9ce7b90ae7d: {Name: Scene, Depth: 0}
+    f7505fcafbd4b80d5802f29310c6d995: {Name: Camera, Depth: 1}
+    dadd50966baf5a3a9e9bfcdf0267b194: {Name: Light, Depth: 1}
+    d2dc3ab8fd00f54074d2e030359dc832: {Name: Cube, Depth: 1}
+~SourceHashes:
+    e5be12746d25d80edf84699ad7efe4ab~../../3d/WorldIdea.dae: 10e138f79c0bccfb47d6bca1e0165819
