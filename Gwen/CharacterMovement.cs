@@ -7,7 +7,7 @@ namespace Gwen
 {
     public class CharacterMovement : SyncScript
     {
-        public int ForwardsSpeed = 1;
+        public int ForwardsSpeed = 4;
         public int BackwardsSpeed = 1;
         public Vector2 MovementMultiplier = new Vector2(3, 0);
 

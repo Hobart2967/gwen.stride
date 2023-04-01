@@ -87,7 +87,9 @@ Hierarchy:
                                 LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                     da230f283a0210141a8d77ab36154203: !Gwen.CharacterMovement,Gwen
                         Id: 562f2736-6141-4414-a899-d2e1fc2c49d3
-                        MovementMultiplier: {X: 3.0, Y: 0.0, Z: 4.0}
+                        ForwardsSpeed: 3
+                        BackwardsSpeed: 1
+                        MovementMultiplier: {X: 3.0, Y: 0.0}
                     d2665b321101234b512e2ee0b0add889: !Gwen.PersonCamera,Gwen
                         Id: f76cc4bd-db82-431e-afb0-b7b28c0b0c7c
                         MouseSpeed: 0.6
