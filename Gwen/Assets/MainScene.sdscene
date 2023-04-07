@@ -10,6 +10,7 @@ Hierarchy:
         - ref!! a73107c9-4945-4139-959e-d5f33b79febc
         - ref!! 0f7e849e-6fd1-4597-a60c-ad110a11cb09
         - ref!! 30d1a40c-7055-42ff-a682-37f98c3c8e57
+        - ref!! 395920f1-bc6d-4bb5-a8c3-e6acc59cfba5
     Parts:
         -   Entity:
                 Id: 0d91751b-7dc3-4f3c-9c66-4187d9c515ed
@@ -28,7 +29,7 @@ Hierarchy:
                 Components:
                     767e318843c0e5aaabfb29a4ec86a61b: !TransformComponent
                         Id: 6f34b0c9-d0ae-4bf2-9d2b-9d38fa675ff8
-                        Position: {X: 0.0, Y: 0.0, Z: 0.8809284}
+                        Position: {X: 59.97781, Y: 0.0, Z: 0.8809284}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 3.7, Y: 1.0, Z: 3.7}
                         Children: {}
@@ -59,7 +60,7 @@ Hierarchy:
                 Components:
                     bad442ea086d34068114f35e4ba868bf: !TransformComponent
                         Id: 38ebe1c0-713e-4311-9409-fed5a0084324
-                        Position: {X: -0.0018191338, Y: 3.0471306, Z: 1.1896448}
+                        Position: {X: 6.913592, Y: 4.7650046, Z: 1.1896448}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 0.79283863, Z: 1.0}
                         Children:
@@ -87,7 +88,9 @@ Hierarchy:
                                 LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                     da230f283a0210141a8d77ab36154203: !Gwen.CharacterMovement,Gwen
                         Id: 562f2736-6141-4414-a899-d2e1fc2c49d3
-                        MovementMultiplier: {X: 3.0, Y: 0.0, Z: 4.0}
+                        ForwardsSpeed: 3
+                        BackwardsSpeed: 1
+                        MovementMultiplier: {X: 3.0, Y: 0.0}
                     d2665b321101234b512e2ee0b0add889: !Gwen.PersonCamera,Gwen
                         Id: f76cc4bd-db82-431e-afb0-b7b28c0b0c7c
                         MouseSpeed: 0.6
@@ -95,6 +98,35 @@ Hierarchy:
                         MaxLookDownAngle: 50.0
                         InvertMouseY: false
                         MaxCameraDistance: 12.0
+                        MinimalHitDistance: 1.0
+        -   Entity:
+                Id: 395920f1-bc6d-4bb5-a8c3-e6acc59cfba5
+                Name: WorldIdea
+                Components:
+                    6a95e38b06337ebfd783caa60da2dc43: !TransformComponent
+                        Id: aced311e-170a-47a9-8207-0da7625527a3
+                        Position: {X: -2.2293372, Y: -2.3841858E-07, Z: 1.5556583}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 14.204538, Y: 13.548589, Z: 15.420047}
+                        Children: {}
+                    1460b2e8f0cc66c76ebfd994cbf6a519: !ModelComponent
+                        Id: 2a84f987-7516-4b33-be2f-508cef4a00e6
+                        Model: 71942c7e-8723-4f83-9ec1-bd608baf3164:Models/WorldIdea
+                        Materials:
+                            59f42fe620d6c3fa9e84d66de56b8395~0: 9f9eba4e-0437-4f5a-bf2a-2a693a9b3220:Materials/rock/rock
+                    f74cf262e7a89abe4ed5b82d5ffb6f0c: !StaticColliderComponent
+                        Id: 1e3f6666-60e1-4989-94c2-520aaaf47d0f
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        AlwaysUpdateNaviMeshCache: false
+                        ColliderShapes:
+                            b0944066865a720276412ec0351ea66c: !StaticMeshColliderShapeDesc
+                                Model: 71942c7e-8723-4f83-9ec1-bd608baf3164:Models/WorldIdea
         -   Entity:
                 Id: 466c7564-b07c-4ecf-bee1-59bfdb7d2c67
                 Name: Directional light

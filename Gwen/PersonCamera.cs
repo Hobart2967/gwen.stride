@@ -15,6 +15,7 @@ namespace Gwen
         public float MaxLookDownAngle = 50;
         public bool InvertMouseY = false;
         public float MaxCameraDistance = 20;
+        public float MinimalHitDistance = 1.0f;
 
         private Entity firstPersonCameraPivot;
         private Entity thirdPersonCameraPivot;
@@ -23,7 +24,9 @@ namespace Gwen
         private Vector2 maxCameraAnglesRadians;
         private CharacterComponent character;
         private Vector3 _cameraOffset = new Vector3(0, 0, -3);
-        
+        private float rotationSpeed = 0.05f;
+        private Simulation simulation;
+
         public override void Start()
         {
             firstPersonCameraPivot = Entity.FindChild("Pivot");
@@ -39,9 +42,10 @@ namespace Gwen
             Input.MousePosition = new Vector2(0.5f, 0.5f);
 
             isActive = true;
-            Game.IsMouseVisible = false;
+            
 
             character = Entity.Get<CharacterComponent>();
+            simulation = this.GetSimulation();
         }
 
         private void ProcessInput()
@@ -61,40 +65,74 @@ namespace Gwen
 
         public override void Update()
         {
-            if (Input.IsKeyPressed(Keys.Escape))
-            {
-                isActive = !isActive;
-                Game.IsMouseVisible = !isActive;
-                Input.UnlockMousePosition();
-            }
-
             ProcessInput();
-           
-            if (isActive)
+                
+            if (Input.IsKeyDown(Keys.A))
+            {
+                camRotation.Y += rotationSpeed;
+            } 
+            else if(Input.IsKeyDown(Keys.D))
+            {
+                camRotation.Y -= rotationSpeed;
+            }
+                
+            character.Orientation = Quaternion.RotationY(camRotation.Y);
+            
+            float x, y, z;
+            thirdPersonCameraPivot.Transform.Position.Deconstruct(out x, out y, out z);
+            // Apply Y rotation to character entity
+            if (Input.IsMouseButtonDown(MouseButton.Right))
             {
                 Input.LockMousePosition();
+
                 var mouseMovement = Input.MouseDelta * MouseSpeed;
 
-                // Update camera rotation values
                 camRotation.Y += -mouseMovement.X;
-                camRotation.X += InvertMouseY ? -mouseMovement.Y : mouseMovement.Y;
+
+                camRotation.X += InvertMouseY
+                    ? -mouseMovement.Y
+                    : mouseMovement.Y;
+
                 camRotation.X = MathUtil.Clamp(camRotation.X, maxCameraAnglesRadians.X, maxCameraAnglesRadians.Y);
 
-                // Apply Y rotation to character entity
-                if (Input.IsMouseButtonDown(MouseButton.Right))
-                {
-                    character.Orientation = Quaternion.RotationY(camRotation.Y);
-                }
-                else 
-                {
-                    firstPersonCameraPivot.Transform.Rotation = Quaternion.RotationY(camRotation.Y);
-                }
-                // Entity.Transform.Rotation = Quaternion.RotationY(camRotation.Y);
+                Game.IsMouseVisible = false;
 
-                // Apply X camera rotation to the existing camera rotations
+                character.Orientation = Quaternion.RotationY(camRotation.Y);
+                
                 firstPersonCameraPivot.Transform.Rotation = Quaternion.RotationX(camRotation.X);
-                thirdPersonCameraPivot.Transform.Position = new Vector3(0);
-                thirdPersonCameraPivot.Transform.Position += this._cameraOffset;
+            }
+            else
+            {
+                Input.UnlockMousePosition();
+                Game.IsMouseVisible = true;
+                thirdPersonCameraPivot.Transform.Position = new Vector3(x, y, z);
+            }
+
+            // Entity.Transform.Rotation = Quaternion.RotationY(camRotation.Y);
+            // Apply X camera rotation to the existing camera rotations                
+
+            
+            thirdPersonCameraPivot.Transform.Position = new Vector3(x, y, 0);
+            thirdPersonCameraPivot.Transform.Position += this._cameraOffset;
+
+            thirdPersonCameraPivot.Transform.UpdateWorldMatrix();
+
+            var raycastStart = firstPersonCameraPivot.Transform.WorldMatrix.TranslationVector;
+            var raycastEnd = thirdPersonCameraPivot.Transform.WorldMatrix.TranslationVector;
+
+            
+
+            if (this.simulation.Raycast(raycastStart, raycastEnd, out HitResult result))
+            {
+                var distance = Vector3.Distance(raycastStart, result.Point);
+                if (distance > MinimalHitDistance)
+                {
+                    thirdPersonCameraPivot.Transform.Position.Z = -(distance - 0.1f);
+                }
+                else
+                {
+                    thirdPersonCameraPivot.Transform.Position = new Vector3(this._cameraOffset.X, this._cameraOffset.Y, 0);
+                }
             }
         }
     }

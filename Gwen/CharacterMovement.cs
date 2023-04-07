@@ -7,7 +7,10 @@ namespace Gwen
 {
     public class CharacterMovement : SyncScript
     {
-        public Vector3 MovementMultiplier = new Vector3(3, 0, 4);
+        public int ForwardsSpeed = 4;
+        public int BackwardsSpeed = 1;
+        public Vector2 MovementMultiplier = new Vector2(3, 0);
+
         private CharacterComponent character;
 
         public override void Start()
@@ -20,9 +23,10 @@ namespace Gwen
             var finalMovementMultiplier = new Vector3(
                 this.MovementMultiplier.X,
                 this.MovementMultiplier.Y,
-                this.MovementMultiplier.Z);
+                Input.IsKeyDown(Keys.S) ? this.BackwardsSpeed : this.ForwardsSpeed);
 
             var velocity = new Vector3();
+
             if (Input.IsKeyDown(Keys.W))
             {
                 velocity.Z++;
@@ -32,19 +36,19 @@ namespace Gwen
                 velocity.Z--;
             }
 
-            if (Input.IsKeyDown(Keys.A))
+            if (Input.IsKeyDown(Keys.Q))
             {
                 velocity.X++;
             }
 
             if (Input.IsKeyDown(Keys.LeftShift)) {
                 finalMovementMultiplier = new Vector3(
-                    this.MovementMultiplier.X,
-                    this.MovementMultiplier.Y,
-                    this.MovementMultiplier.Z * 2);
+                    finalMovementMultiplier.X,
+                    finalMovementMultiplier.Y,
+                    finalMovementMultiplier.Z * 2);
             }
 
-            if (Input.IsKeyDown(Keys.D))
+            if (Input.IsKeyDown(Keys.E))
             {
                 velocity.X--;
             }
